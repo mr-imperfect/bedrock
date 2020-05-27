@@ -1,0 +1,1115 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+$font-path: '/media/fonts';
+$image-path: '/media/protocol/img';
+@import '../../../../protocol/css/includes/lib';
+
+@import '../../../../protocol/css/components/emphasis-box';
+@import '../../../../protocol/css/components/zap';
+@import '../../../../protocol/css/templates/card-layout';
+
+
+
+//* -------------------------------------------------------------------------- */
+// put spacing into variables so it's easier to adjust spacing at each break point
+
+// xs
+$v-grid-xs: $layout-md;
+$h-grid-xs: $layout-xs;
+
+//md
+$v-grid-md: $layout-xl / 2;
+$h-grid-md: 64px;
+
+//lg
+$v-grid-lg: 192px / 2;
+$h-grid-lg: 80px;
+
+
+// vertical spacing
+main .mzp-l-content {
+    padding-top: $v-grid-xs;
+    padding-bottom: $v-grid-xs;
+
+    @media #{$mq-md} {
+        padding-top: $v-grid-md;
+        padding-bottom: $v-grid-md;
+    }
+
+    @media #{$mq-lg} {
+        padding-top: $v-grid-lg;
+        padding-bottom: $v-grid-lg;
+    }
+}
+
+main {
+
+    h2, h3, h4 {
+        margin-bottom: $spacing-md;
+    }
+
+    .mzp-c-button-download-container {
+        margin-bottom: 0;
+    }
+}
+
+
+.show-android,
+.show-ios {
+    display: none;
+
+    .android &,
+    .ios & {
+        display: block;
+    }
+}
+
+.show-else {
+
+    .android &,
+    .ios & {
+        display: none;
+    }
+}
+
+.u-center {
+    text-align: center;
+}
+
+.c-section-title {
+    @include text-title-lg;
+    margin: 0 auto $layout-lg;
+    max-width: $content-lg;
+    text-align: center;
+}
+
+/* logo */
+.c-logo.t-browser-word-hor-white-xs,
+.c-logo.t-browser-word-hor-xs {
+    @include at2x('/media/protocol/img/logos/firefox/browser/logo-word-hor-sm.png', auto, 48px);
+    @include image-replaced;
+    background-position: top left;
+    background-repeat: no-repeat;
+    margin-bottom: 40px;
+    height: 48px;
+
+    @media #{$mq-lg} {
+        margin-bottom: 56px;
+    }
+}
+
+.c-logo.t-browser-word-hor-white-xs {
+    @include at2x('/media/protocol/img/logos/firefox/browser/logo-word-hor-white-sm.png', auto, 48px);
+}
+
+/* trio */
+
+.trio {
+    @include clearfix;
+    max-width: $content-sm;
+    margin: 0 auto;
+
+    li {
+        margin-bottom: 64px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    img {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+
+    @media #{$mq-md} {
+        img {
+            float: left;
+            margin-left: 0;
+            margin-right: $layout-sm;
+        }
+    }
+
+    @media #{$mq-lg} {
+        max-width: $content-lg;
+
+        li {
+            float: left;
+            width: calc(33.3% - (#{$h-grid-lg} - (#{$h-grid-lg} / 3)));
+
+            &:nth-child(2n) {
+                margin-left: $h-grid-lg;
+                margin-right: $h-grid-lg;
+            }
+        }
+
+        img {
+            float: none;
+        }
+    }
+}
+/*
+
+    Cards
+
+*/
+
+.mzp-c-card {
+    background-color: transparent;
+}
+
+.mzp-l-card-third {
+    @media #{$mq-sm} {
+        .mzp-c-card {
+            width: calc(50% - (#{$h-grid-xs} / 2));
+            @include bidi((
+                (margin-left, 0, $h-grid-xs),
+                (margin-right, $h-grid-xs, 0),
+            ));
+
+            &:nth-child(even) {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+    }
+
+    @media #{$mq-md} {
+        .mzp-c-card {
+            width: calc(50% - (#{$h-grid-md} / 2));
+            @include bidi((
+                (margin-left, 0, $h-grid-md),
+                (margin-right, $h-grid-md, 0),
+            ));
+        }
+    }
+
+    @media #{$mq-lg} {
+        .mzp-c-card {
+            width: calc(33.3% - (#{$h-grid-lg} - (#{$h-grid-lg} / 3)));
+
+            &:nth-child(even) {
+                @include bidi((
+                    (margin-left, 0, $h-grid-lg),
+                    (margin-right, $h-grid-lg, 0),
+                ));
+            }
+
+            &:nth-child(3n) {
+                @include bidi(((margin-right, 0, margin-left, 0),));
+            }
+        }
+    }
+}
+
+@media #{$mq-sm} {
+    .mzp-l-card-half {
+        @include clearfix;
+
+        .mzp-c-card {
+            @include bidi((
+                (margin-left, 0, $h-grid-xs),
+                (margin-right, $h-grid-xs, 0),
+            ));
+
+            &:nth-child(2n) {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+    }
+
+    .mzp-l-card-half .mzp-c-card {
+        width: calc(50% - (#{$h-grid-xs} - (#{$h-grid-xs} / 2)));
+    }
+}
+
+@media #{$mq-md} {
+    .mzp-l-card-half {
+
+        .mzp-c-card {
+            @include bidi((
+                (margin-left, 0, $h-grid-md),
+                (margin-right, $h-grid-md, 0),
+            ));
+
+            &:nth-child(2n) {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+    }
+
+    .mzp-l-card-half .mzp-c-card {
+        width: calc(50% - (#{$h-grid-md} - (#{$h-grid-md} / 2)));
+    }
+}
+
+@media #{$mq-lg} {
+    .mzp-l-card-half {
+        @include clearfix;
+
+        .mzp-c-card {
+            @include bidi((
+                (float, left, right),
+                (margin-left, 0, $h-grid-lg),
+                (margin-right, $h-grid-lg, 0),
+            ));
+
+            &:nth-child(2n) {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            &:nth-child(2n+1) {
+                @include bidi(((clear, left, right),));
+            }
+        }
+    }
+
+    .mzp-l-card-half .mzp-c-card {
+        width: calc(50% - (#{$h-grid-lg} - (#{$h-grid-lg} / 2)));
+    }
+}
+
+.mzp-l-card-half .mzp-c-card {
+    max-width: 100%;
+}
+
+.mzp-l-card-half img {
+    display: block;
+    margin-bottom: $spacing-xl;
+}
+
+.mzp-l-card-third img {
+    display: block;
+    margin-bottom: $spacing-lg;
+}
+
+
+
+/* -------------------------------------------------------------------------- */
+// Basic vertical alignment
+
+.c-block {
+    overflow-x: hidden;
+    padding: $v-grid-xs 0;
+    position: relative;
+    margin: 0 auto;
+
+    @media #{$mq-md} {
+        padding: $v-grid-md 0;
+    }
+
+    @media #{$mq-lg} {
+        padding: $v-grid-lg 0;
+    }
+}
+
+.c-block-container {
+    @include clearfix();
+    @include border-box;
+    margin: 0 auto;
+    max-width: $content-max;
+    min-width: $content-xs;
+    padding: 0 $h-grid-xs;
+
+    @media #{$mq-md} {
+        padding: 0 $h-grid-md;
+    }
+
+    @media #{$mq-lg} {
+        padding: 0 $h-grid-lg;
+    }
+
+    .mzp-t-dark &,
+    .has-bg {
+        @include light-links;
+        background-color: $color-light-gray-80;
+        color: #fff;
+    }
+}
+
+.c-block-media-img {
+    display: block;
+}
+
+.c-block-body {
+    position: relative;
+
+    // vertical spacing between body and media before side by side display kicks in
+    @media all and (max-width: #{$screen-md - 1}) {
+        &:first-child {
+            margin-bottom: $v-grid-xs;
+
+            @media all and (min-width: #{$screen-md}) {
+                margin-bottom: $v-grid-md;
+            }
+        }
+
+        &:last-child {
+            margin-top: $v-grid-xs;
+
+            @media all and (min-width: #{$screen-md}) {
+                margin-top: $v-grid-md;
+            }
+        }
+
+        .mzp-has-media-hide-on-sm & {
+            margin-top: 0;
+            margin-bottom: 0;
+
+            @media all and (min-width: #{$screen-md}) {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.c-block-media {
+    position: relative;
+
+    @media all and (max-width:#{$screen-md - 1}) {
+        .mzp-has-media-hide-on-sm & {
+            display: none;
+        }
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+// side by side layout, float based fall back
+
+@media #{$mq-md} {
+    .c-block-body {
+        @include border-box;
+        @include bidi(((float, left, right),));
+        width: 50%;
+        padding: 0 ($h-grid-lg / 2);
+
+        > *:first-child {
+            margin-top: 0;
+        }
+
+        > *:last-child {
+            margin-bottom: 0;
+        }
+
+        .mzp-l-block-body-33 & {
+            width: 33.33%;
+        }
+
+        .mzp-l-block-body-66 & {
+            width: 66.66%;
+        }
+
+        .mzp-l-reversed & {
+            @include bidi(((float, right, left),));
+        }
+    }
+
+    .c-block-media {
+        @include border-box;
+        @include bidi(((float, right, left),));
+        width: 50%;
+        padding: 0 ($h-grid-lg / 2);
+
+
+        .mzp-l-block-body-33 & {
+            width: 66.66%;
+        }
+
+        .mzp-l-block-body-66 & {
+            width: 33.33%;
+        }
+
+        .mzp-l-reversed & {
+            @include bidi(((float, left, right),));
+        }
+    }
+
+}
+
+/* -------------------------------------------------------------------------- */
+// side by side layout, grid based
+
+@media #{$mq-md} {
+    @supports( display:grid) {
+        .c-block-container {
+            // grid is all start/end based we don't need bidi declarations for RTL support \o/
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-areas: "body media";
+            grid-column-gap: $h-grid-lg;
+
+            .mzp-l-block-body-33 > & {
+                grid-template-columns: 1fr 2fr;
+            }
+
+            .mzp-l-block-body-66 > & {
+                grid-template-columns: 2fr 1fr;
+            }
+
+            .mzp-l-reversed > & {
+                grid-template-areas: "media body";
+            }
+
+            .mzp-l-block-body-33.mzp-l-reversed > & {
+                grid-template-columns: 2fr 1fr;
+            }
+
+            .mzp-l-block-body-66.mzp-l-reversed > & {
+                grid-template-columns: 1fr 2fr;
+            }
+        }
+
+        .c-block-body,
+        .c-block-media {
+            .c-block-container & { // extra specificitly to over-ride the styles that make the float fall-back work
+                float: none;
+                min-width: 0; //because of https://stackoverflow.com/questions/43311943/prevent-content-from-expanding-grid-items
+                padding: 0;
+                width: auto;
+            }
+        }
+
+        .c-block-body {
+            grid-area: body;
+        }
+
+        .c-block-media {
+            align-self: stretch;
+            grid-area: media;
+
+            .c-block-media-img {
+                display: block;
+                max-width: none;
+            }
+        }
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+// constraints on height or width of media
+
+.c-block-media {
+    @media all and (max-width: #{$screen-lg - 1}) {
+        // center image & constrain width
+        &.mzp-l-media-constrain-on-sm-md {
+            text-align: center;
+
+            .c-block-media-img {
+                margin: 0 auto;
+                width: $content-sm;
+            }
+        }
+    }
+
+    @media #{$mq-md} {
+        @supports ( display:grid ) {
+            &.mzp-l-media-constrain-width {
+                .c-block-media-img {
+                    max-width: 100%;
+                }
+            }
+
+            &.mzp-l-media-constrain-height {
+                height: 100%;
+                justify-self: auto !important; /* stylelint-disable-line declaration-no-important */
+
+                .c-block-media-img {
+                    bottom: 0;
+                    left: 0;
+                    max-height: 100%;
+                    max-width: auto;
+                    position: absolute;
+                    top: 0;
+                    width: auto;
+
+                    [dir='rtl'] &,
+                    .mzp-l-reversed & {
+                        left: auto;
+                        right: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------- */
+// vertical spacing for body or media
+
+
+.mzp-t-dark,
+.has-bg {
+    .c-block-body {
+        // vertical spacing between text and edges when there's a bg-color
+        @media all and (max-width: #{$screen-lg - 1}) {
+            &:first-child {
+                padding-top: $v-grid-xs;
+
+                @media all and (min-width: #{$screen-md}) {
+                    padding-top: $v-grid-md;
+                }
+            }
+
+            &:last-child {
+                padding-bottom: $v-grid-xs;
+
+                @media all and (min-width: #{$screen-md}) {
+                    padding-bottom: $v-grid-md;
+                }
+            }
+
+            @at-root #{selector-append(".mzp-has-media-hide-on-sm-md", &)} {
+                padding-top: $v-grid-xs;
+                padding-bottom: $v-grid-xs;
+
+                @media all and (min-width: #{$screen-md}) {
+                    padding-top: $v-grid-md;
+                    padding-bottom: $v-grid-md;
+                }
+            }
+        }
+    }
+}
+
+@media #{$mq-lg} {
+    @supports(display:grid) {
+        .mzp-t-dark,
+        .has-bg {
+            .c-block-body {
+                padding: $v-grid-lg 0;
+            }
+        }
+
+        .mzp-l-v-pad {
+            &.c-block-body,
+            &.c-block-media {
+                padding: $v-grid-lg 0;
+            }
+        }
+
+        .mzp-l-pop-top,
+        .mzp-l-pop {
+            &.c-block {
+                padding-top: $v-grid-lg * 2;
+            }
+            .c-block-media {
+                margin-top: $v-grid-lg * -1;
+            }
+        }
+        .mzp-l-pop-bottom,
+        .mzp-l-pop {
+            &.c-block {
+                padding-bottom: $v-grid-lg * 2;
+            }
+            .c-block-media {
+                margin-bottom: $v-grid-lg * -1;
+            }
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------- */
+// vertical and horizontal aligment for body or media
+// text align works for float fallback
+// justify positioning works for no constraint or constraint-width
+// absolute positioning works on constrain-height
+
+.c-block-container {
+    .mzp-l-h-start {
+        @include bidi(((text-align, left, right),));
+        justify-self: start;
+
+        .c-block-media-img {
+            @include bidi((
+                (margin-right, auto, margin-left, 0),
+                (margin-left, 0, margin-right, 0),
+            ));
+        }
+    }
+
+    .mzp-l-h-center {
+        justify-self: center;
+        text-align: center;
+
+        .c-block-media-img {
+            margin: 0 auto;
+        }
+
+        @media #{$mq-lg} {
+            @supports(display:grid) {
+                &.mzp-l-media-constrain-height .c-block-media-img {
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+        }
+    }
+
+    .mzp-l-h-end {
+        justify-self: end;
+
+        .c-block-media-img {
+            @include bidi((
+                (margin-left, auto, margin-right, 0),
+                (margin-right, 0, margin-left, 0),
+            ));
+        }
+
+        @media #{$mq-lg} {
+            @supports(display:grid) {
+                &.mzp-l-media-constrain-height .c-block-media-img {
+                    right: 0;
+                    left: auto;
+                }
+            }
+        }
+    }
+
+    // vertical alignment only after grid starts
+    @media #{$mq-md} {
+        @supports(display:grid) {
+
+            .mzp-l-v-start {
+                align-self: start;
+            }
+
+            .mzp-l-v-center {
+                align-self: center;
+
+                &.mzp-l-media-constrain-height .c-block-media-img {
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+
+                &.mzp-l-h-center.mzp-l-media-constrain-height .c-block-media-img {
+                    transform: translateY(-50%) translateX(-50%);
+                }
+            }
+
+            .mzp-l-v-end {
+                align-self: end;
+
+                &.mzp-l-media-constrain-height .c-block-media-img {
+                    top: auto;
+                }
+            }
+        }
+    }
+}
+
+/* over rides for specific blocks */
+.t-intro {
+
+    &.c-block {
+        padding-top: 0;
+    }
+
+    .c-block-container {
+        max-width: $content-max;
+        //padding-bottom: $layout-2xl / 2;
+    }
+
+    p {
+        margin-bottom: $v-grid-md;
+    }
+}
+
+.t-releases {
+    position: relative;
+    padding-bottom: 0;
+    margin-bottom: $v-grid-xs;
+
+    @media #{$mq-md} {
+        margin-bottom: $v-grid-md;
+    }
+
+    @media #{$mq-lg} {
+        margin-bottom: $v-grid-lg;
+    }
+
+    &:before {
+        background-image: url('/media/img/firefox/new/desktop/release-noodles.svg');
+        content: '';
+        display: block;
+        height: 212px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 287px;
+        z-index: 0;
+    }
+
+    .mzp-c-emphasis-box {
+        margin: 0 auto;
+        padding-left: $h-grid-lg;
+        padding-right: $h-grid-lg;
+        position: relative;
+        z-index: 1;
+    }
+
+    .c-section-title {
+        padding-top: $spacing-sm;
+    }
+
+    img {
+        margin-bottom: $spacing-lg;
+    }
+}
+
+.c-notes {
+    margin-bottom: $layout-sm;
+}
+
+.t-highlights {
+    &.mzp-l-content {
+        padding-bottom: 0;
+    }
+
+    .c-section-title {
+        margin-bottom: 0;
+    }
+
+    p {
+        margin-bottom: $spacing-xl;
+    }
+
+    @media #{$mq-lg} {
+        .c-block-body {
+            max-width: 376px;
+        }
+    }
+}
+
+.t-compare {
+    padding-top: $layout-lg;
+}
+
+.t-features {
+    background-color: $color-light-gray-10;
+    background-image: url('/media/img/firefox/new/desktop/features/one.svg'),
+                      url('/media/img/firefox/new/desktop/features/two.svg'),
+                      url('/media/img/firefox/new/desktop/features/oval-one.svg'),
+                      url('/media/img/firefox/new/desktop/features/oval-two.svg'),
+                      url('/media/img/firefox/new/desktop/features/rect-one.svg'),
+                      url('/media/img/firefox/new/desktop/features/rect-two.svg');
+    background-repeat: no-repeat;
+    background-position: 80% 63%, // C
+                         top left, // V
+                         bottom 10% right, // circle
+                         bottom left calc(50vw - 600px), // circle
+                         bottom 30% left, // oval
+                         top right;
+
+    margin-top: $v-grid-xs;
+    margin-bottom: $v-grid-xs;
+
+    @media #{$mq-md} {
+        margin-top: $v-grid-md;
+        margin-bottom: $v-grid-md;
+    }
+
+    @media #{$mq-lg} {
+        margin-top: $v-grid-lg;
+        margin-bottom: $v-grid-lg;
+    }
+
+    ul {
+        margin-left: $spacing-md;
+        margin-bottom: 0;
+    }
+
+    .mzp-l-card-third {
+        margin: 0 auto;
+        max-width: $content-lg;
+    }
+
+    .mzp-c-card {
+        margin-bottom: $v-grid-xs;
+
+        @media #{$mq-md} {
+            margin-bottom: $v-grid-md;
+        }
+
+        @media #{$mq-lg} {
+            margin-bottom: $v-grid-lg;
+        }
+    }
+
+    .mzp-c-button-download-container {
+        display: block;
+    }
+}
+
+.c-chart {
+    margin: 0;
+}
+
+.t-custom {
+    @media #{$mq-lg} {
+        .trio {
+            max-width: $content-lg;
+
+            li {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.c-screen {
+    position: relative;
+    margin-bottom: $layout-sm;
+
+    // &:before {
+    //     background-image: url('/media/img/firefox/new/desktop/customize/pink-dot.svg'),
+    //                   url('/media/img/firefox/new/desktop/customize/pink-oval-outline.svg'),
+    //                   url('/media/img/firefox/new/desktop/customize/purple-oval.svg'),
+    //                   url('/media/img/firefox/new/desktop/customize/yellow-c-outline.svg'),
+    //                   url('/media/img/firefox/new/desktop/customize/pink-oval.svg');
+    //     background-repeat: no-repeat;
+    //     background-position: top right 38%,
+    //                          top 30px left 80px,
+    //                          bottom left,
+    //                          bottom 160px right,
+    //                          top 30px right 20px;
+    //     bottom: 0;
+    //     content: '';
+    //     display: block;
+    //     height: 471px;
+    //     left: 0;
+    //     max-width: $content-xl;
+    //     position: absolute;
+    //     width: 100%;
+    //     z-index: 0;
+
+    //     @media #{$mq-md} {
+    //         left: $layout-lg * -1;
+    //         width: calc(100% + #{$layout-lg * 2});
+    //     }
+
+    //     @media #{$mq-lg} {
+    //         left: $layout-xl * -1;
+    //         width: calc(100% + #{$layout-xl * 2});
+    //     }
+
+    //     @media #{$mq-xl} {
+    //         left: 0;
+    //         width: 100%;
+    //     }
+    // }
+
+    margin-left: $layout-xs * -1;
+    margin-right: $layout-xs * -1;
+
+    @media #{$mq-md} {
+        margin-left: $layout-md * -1;
+        margin-right: $layout-md * -1;
+    }
+
+    @media #{$mq-lg} {
+        margin-left: $layout-xl * -1;
+        margin-right: $layout-xl * -1;
+    }
+
+    img {
+        display: block;
+        margin: -42px auto 0 auto;
+        position: relative;
+        z-index: 1;
+
+    }
+}
+
+.t-company {
+
+    img {
+        display: block;
+        margin: 0 auto $layout-sm;
+        width: $content-xs;
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+
+    .mzp-c-card {
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    @media all and (max-width: #{$screen-sm - 1}) {
+        @supports (display: flex) {
+            .mzp-c-card {
+                @include flexbox;
+                flex-direction: column;
+
+                &:last-child img {
+                    margin-bottom: 0;
+                }
+            }
+
+            img {
+                margin: $v-grid-xs auto;
+                order: 10;
+            }
+        }
+    }
+
+    @media #{$mq-sm} {
+        .mzp-c-card {
+            margin-bottom: 0;
+        }
+
+        img {
+            width: auto;
+        }
+    }
+}
+
+.t-discover {
+    max-width: $content-lg + $layout-xl * 2;
+
+    img {
+        display: block;
+        margin: 0 auto $spacing-lg;
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+
+    .mzp-c-card {
+        margin-bottom: $layout-xl;
+    }
+
+    .mzp-c-button-download-container {
+        display: block;
+    }
+}
+
+.c-support {
+    @include text-title-xs;
+    background-color: $color-light-gray-10;
+    padding: $spacing-lg;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/* mobile */
+
+main {
+    @include flexbox;
+    flex-direction: column;
+}
+
+#js-mobile {
+    order: -1;
+}
+
+.t-mobile {
+    @include light-links;
+    background-color: $color-violet-70;
+    background-image: url('/media/img/firefox/new/desktop/mobile/circle-bottom.png'),
+                      url('/media/img/firefox/new/desktop/mobile/circle-top-right.png'),
+                      url('/media/img/firefox/new/desktop/mobile/oval-bottom.png'),
+                      url('/media/img/firefox/new/desktop/mobile/oval-left.png'),
+                      url('/media/img/firefox/new/desktop/mobile/elbow-bottom-right.png'),
+                      url('/media/img/firefox/new/desktop/mobile/elbow.png');
+    background-repeat: no-repeat;
+    background-position: bottom -120px right 10px,
+                         top right -200px,
+                         bottom -100px left 20px,
+                         top 100px left -50px,
+                         bottom right -500px,
+                         top 15% left 100px;
+    color: $color-white;
+
+    .c-block-body {
+        min-height: calc(100vh - 75px - #{$v-grid-xs * 2} - 150px); // minus height of nav, and invitation to read desktop page
+    }
+
+    @media #{$mq-md} {
+        background-position: bottom left 120px,
+                             top right,
+                             bottom left 20px,
+                             top 100px left,
+                             bottom right,
+                             top 15% center;
+
+        .c-block-body {
+            min-height: calc(100vh - 92px - #{$v-grid-md * 2} - 150px); // minus height of nav, and invitation to read desktop page
+        }
+    }
+
+    @media #{$mq-lg} {
+        background-position: bottom left 100px,
+                             top right,
+                             bottom left 40%,
+                             top 100px left,
+                             bottom right,
+                             top 15% center;
+        .c-block-body {
+            min-height: calc(100vh - 92px - #{$v-grid-lg * 2} - 150px); // minus height of nav, and invitation to read desktop page
+        }
+    }
+
+    .c-block-container {
+        max-width: $content-max;
+    }
+
+
+}
+
+.c-desktop {
+    @include text-title-xs;
+    background-image: url('/media/img/firefox/new/desktop/mobile-arrow.svg');
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    color: $color-purple-50;
+    font-weight: bold;
+    padding: $spacing-md $h-grid-xs #{$spacing-lg + 64px};
+    text-align: center;
+}
+
+
+
+
+/* animation */
+
+@supports (animation-fill-mode: forwards) {
+    .ani {
+        opacity: 0;
+        transform-origin: bottom center;
+    }
+
+    .fancy {
+        animation-duration: 1s;
+        animation-name: zoom;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes zoom {
+        from {
+            opacity: 0;
+            transform: scaleX(0.6) scaleY(0.6);
+        }
+        to {
+            opacity: 1;
+            transform: scaleX(1) scaleY(1);
+        }
+    }
+}

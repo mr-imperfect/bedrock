@@ -1,0 +1,364 @@
+{# This Source Code Form is subject to the terms of the Mozilla Public
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/. -#}
+
+{% from "macros.html" import google_play_button, fxa_email_form with context %}
+{% from "macros-protocol.html" import hero, picto_card with context %}
+
+{% extends "firefox/new/desktop/base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  {{ css_bundle('firefox_desktop_download') }}
+{% endblock %}
+
+{% set referrals = '?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=firefox-desktop' %}
+
+{% block content %}
+<main role="main" class="main-download" {% if v %}data-variant="{{ v }}"{% endif %}>
+
+  <section class="c-block t-intro show-else">
+    <div class="c-block-container">
+      <div class="c-block-body">
+        <h1 class="c-logo t-browser-word-hor-xs">Firefox Browser</h1>
+        <h2 class="mzp-has-zap-7">Get the browser that protects what's important</h2>
+
+        <p>No shady privacy policies or back doors for advertisers. Just a lightning fast browser that doesn’t sell you out.</p>
+
+        {{ download_firefox(dom_id='download-primary', download_location='primary cta') }}
+      </div>
+      <div class="c-block-media">
+        {{ high_res_img('img/firefox/new/desktop/hero-flat.jpg', {'width': '637', 'height': '531', 'alt': '', 'class': 'c-block-media-img' }) }}
+      </div>
+    </div>
+  </section>
+
+  <section class="mzp-l-content t-releases">
+    <div class="mzp-c-emphasis-box js-go">
+      <h2 class="c-section-title mzp-has-zap-8"><strong>Latest</strong> Firefox features</h2>
+
+      <ul class="trio">
+        <li>
+          <img src="{{ static('img/firefox/new/desktop/picture-in-picture.svg') }}" width="64" height="64" alt="">
+          <h3 class="mzp-u-title-xs">Picture-in-Picture</h3>
+          <p>Pop a video out of the browser window so you can stream and multitask.</p>
+        </li>
+
+        <li>
+          <img src="{{ static('img/firefox/new/desktop/dark-mode.svg') }}" width="64" height="64" alt="">
+          <h3 class="mzp-u-title-xs">Expanded Dark Mode</h3>
+          <p>Take it easy on your eyes every time you go online.</p>
+        </li>
+
+        <li>
+          <img src="{{ static('img/firefox/new/desktop/lock.svg') }}" width="64" height="64" alt="">
+          <h3 class="mzp-u-title-xs">An extra layer of protection</h3>
+          <p>DNS over HTTPS (DoH) helps keep internet service providers from selling your data.</p>
+        </li>
+      </ul>
+
+      <p class="c-notes u-center"><a class="mzp-c-cta-link" href="{{ url('firefox.notes') }}" data-cta-type="link" data-cta-text="See Release Notes">See Release Notes</a></p>
+
+    </div>
+  </section>
+
+  <section class="t-highlights">
+    <h2 class="c-section-title mzp-has-zap-11 js-go">Do what you do online.<br> Firefox Browser <strong>isn’t</strong> watching.</h2>
+
+    <div class="t-compare c-block js-go">
+      <div class="c-block-container">
+        <div class="c-block-body mzp-l-v-center mzp-l-h-end">
+          <h3 class="mzp-u-title-sm">How Firefox compares to other browsers</h3>
+          <p>Get all the speed and tools with none of the invasions of privacy. Firefox Browser collects so little data about you, we don’t even require your email address to download. That’s because unlike other browsers, we have no financial stake in following you around the web.</p>
+          {# TODO: need to rebase before I can link #}
+          <p>How we compare to other browsers</p>
+        </div>
+        <div class="c-block-media mzp-l-v-end">
+          <div class="c-chart mzp-c-emphasis-box">
+            comparison chart
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="t-block c-block mzp-l-reversed js-go">
+      <div class="c-block-container">
+        <div class="c-block-body mzp-l-v-center mzp-l-media-constrain-on-sm-md">
+          <h3 class="mzp-u-title-sm">We block the ad trackers. You explore the internet faster.</h3>
+          <p>Ads are distracting and make web pages load slower, while their trackers watch every move you make online. The Firefox browser blocks most trackers automatically, so there’s no need to dig into your security settings.</p>
+          <button>See your protection report</button>
+        </div>
+        <div class="c-block-media mzp-l-v-end mzp-l-h-end">
+          {{ high_res_img('img/firefox/new/desktop/block.jpg', {'width': '504', 'height': '325', 'alt': '', 'loading': 'lazy', 'class': 'c-block-media-img' }) }}
+        </div>
+      </div>
+    </div>
+
+    <div class="t-everyone c-block mzp-l-reversed js-go">
+      <div class="c-block-container">
+        <div class="c-block-body mzp-l-v-center mzp-l-media-constrain-on-sm-md">
+          <h3 class="mzp-u-title-sm">Firefox is for everyone</h3>
+          <p>Available in over 90 languages, and compatible with Windows, Mac and Linux machines, Firefox works no matter what you’re using or where you are. Make sure your operating system is up to date for the best experience.</p>
+          <p><a href="{{ url('firefox.sysreq') }}" class="mzp-c-cta-link" data-cta-type="link" data-cta-text="Review system requirements">Review system requirements</a></p>
+        </div>
+        <div class="c-block-media mzp-l-v-center mzp-l-h-end">
+          <img class="c-clock-media-img" src="{{ static('img/firefox/new/desktop/everyone.svg') }}" loading="lazy" width="367" height="302" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="t-devices c-block js-go">
+      <div class="c-block-container">
+        <div class="c-block-body mzp-l-v-center mzp-l-h-end">
+          <h3 class="mzp-u-title-sm">Put Firefox on all your devices</h3>
+          <p>Take your privacy with you everywhere. Firefox Browsers for iOS and Android have the same strong privacy settings to block trackers from following you around the web, no matter where you are.</p>
+          <div class="mobile-download-buttons-wrapper">
+            <ul class="mobile-download-buttons">
+              <li class="android">
+                {{ google_play_button() }}
+              </li>
+              <li class="ios">
+                <a href="{{ ios_url }}" data-link-type="download" data-download-os="iOS">
+                  <img src="{{ l10n_img('firefox/ios/btn-app-store.svg') }}" alt="{{ ftl('download-button-download-app-store') }}" width="152" height="45">
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="c-block-media mzp-l-v-end mzp-l-h-start mzp-l-media-constrain-on-sm-md">
+          {{ high_res_img('img/firefox/new/desktop/devices.jpg', {'width': '483', 'height': '440', 'loading': 'lazy', 'class': 'c-block-media-img', 'alt': '' }) }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="t-features">
+    <div class="mzp-l-content">
+      <h2 class="c-section-title mzp-has-zap-14 js-go">Do it <strong>all</strong> with Firefox</h2>
+      <div class="mzp-l-card-third js-go">
+        <div class="mzp-c-card">
+          <img src="{{ static('img/firefox/new/desktop/search.svg') }}" loading="lazy" width="32" height="32" alt="">
+          <h3 class="mzp-u-title-xs">Search smarter, faster</h3>
+          <ul class="mzp-u-list-styled">
+            <li>Search from address bar</li>
+            <li>Search engine options</li>
+            <li>Smart search suggestions</li>
+            <li>Bookmark, history and open tab in results</li>
+          </ul>
+        </div>
+
+        <div class="mzp-c-card">
+          <img src="{{ static('img/firefox/new/desktop/highlights.svg') }}" loading="lazy" width="32" height="32" alt="">
+          <h3 class="mzp-u-title-xs">Boost your productivity</h3>
+          <ul class="mzp-u-list-styled">
+            <li>Works with Google products</li>
+            <li>Built-in screenshot tool</li>
+            <li>Bookmarks manager</li>
+            <li>Autosuggest URLs</li>
+            <li>Sync across devices</li>
+            <li>Reader mode </li>
+            <li>Spell check</li>
+            <li>Pinned Tabs</li>
+          </ul>
+        </div>
+
+        <div class="mzp-c-card">
+          <img src="{{ static('img/firefox/new/desktop/picture-in-picture.svg') }}" loading="lazy" width="32" height="32" alt="">
+          <h3 class="mzp-u-title-xs">Stream, share and play</h3>
+          <ul class="mzp-u-list-styled">
+            <li>Block Autoplay of video & audio </li>
+            <li>Picture-in-Picture</li>
+            <li>Curated content on new tab</li>
+            <li>Share links</li>
+          </ul>
+        </div>
+
+        <div class="mzp-c-card">
+          <img src="{{ static('img/firefox/new/desktop/privacy.svg') }}" loading="lazy" width="32" height="32" alt="">
+          <h3 class="mzp-u-title-xs">Protect your privacy</h3>
+          <ul class="mzp-u-list-styled">
+            <li>Third Party Cookie Blocking </li>
+            <li>Fingerprinter Blocking</li>
+            <li>Cryptominer Blocking</li>
+            <li>Private Browsing mode</li>
+            <li>Individual protections report</li>
+          </ul>
+        </div>
+
+        <div class="mzp-c-card">
+          <img src="{{ static('img/firefox/new/desktop/passwords.svg') }}" loading="lazy" width="32" height="32" alt="">
+          <h3 class="mzp-u-title-xs">Secure your personal info</h3>
+          <ul class="mzp-u-list-styled">
+            <li>Breached website alerts</li>
+            <li>Built-in password manager </li>
+            <li>Clear history</li>
+            <li>Form autofill</li>
+            <li>Automatic updates</li>
+          </ul>
+        </div>
+
+        <div class="mzp-c-card">
+          <img src="{{ static('img/firefox/new/desktop/customize.svg') }}" loading="lazy" width="32" height="32" alt="">
+          <h3 class="mzp-u-title-xs">Customize your browser</h3>
+          <ul class="mzp-u-list-styled">
+            <li>Themes</li>
+            <li>Dark mode</li>
+            <li>Library of extensions</li>
+            <li>Adjust search bar settings </li>
+            <li>Change new tab layout</li>
+          </ul>
+        </div>
+      </div>
+
+      {{ download_firefox(dom_id='download-features', download_location='features cta') }}
+
+    </div>
+  </section>
+
+  <section class="mzp-l-content t-custom">
+    <h2 class="c-section-title mzp-has-zap-16 js-go">Make <strong>Firefox</strong> your own</h2>
+
+    <div class="c-screen">
+      {{ high_res_img('img/firefox/new/desktop/customize.jpg', {'width': '1301', 'height': '574', 'loading': 'lazy', 'alt': ''}) }}
+    </div>
+
+    <ul class="trio js-go">
+      <li>
+        <h3 class="mzp-u-title-xs">Extensions for every interest</h3>
+        <p>From security to news to gaming, there’s an <a href="https://addons.mozilla.org/en-US/firefox/extensions/{{referrals }}" rel="external noopener" data-cta-type="link" data-cta-text="extension for everyone">extension for everyone</a>. Add as many as you want until your browser is just right.</p>
+      </li>
+
+      <li>
+        <h3 class="mzp-u-title-xs">Change up your look</h3>
+        <p>Go from light mode to dark mode depending on your mood or preference, or liven things up with a custom theme (rainbow unicorn, perhaps).</p>
+      </li>
+
+      <li>
+        <h3 class="mzp-u-title-xs">Tweak your settings</h3>
+        <p>There’s no need to settle. Change up the new tab page, search bar, bookmarks and more to explore the internet the way you want.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="mzp-l-content t-company">
+    <h2 class="c-section-title mzp-has-zap-9 js-go">Backed by the <strong>non-profit</strong> that puts people first</h2>
+
+    <div class="mzp-l-card-half js-go">
+      <div class="mzp-c-card">
+        {{ high_res_img('img/firefox/new/desktop/person-mozilla.jpg', {'width': '436', 'height': '463', 'loading': 'lazy', 'alt': '' }) }}
+        <h3 class="mzp-u-title-xs">Challenging the status quo since 1998</h3>
+        <p>Firefox was created by <a href="{{ url('mozorg.about') }}" data-cta-type="link" data-cta-text="created by Mozilla">Mozilla</a> as a faster, more private alternative to browsers like Internet Explorer, and now Chrome. Today, our mission-driven company and volunteer community continue to put your privacy above all else.</p>
+      </div>
+
+      <div class="mzp-c-card">
+        {{ high_res_img('img/firefox/new/desktop/person-privacy.jpg', {'width': '436', 'height': '463', 'alt': '' }) }}
+        <h3 class="mzp-u-title-xs">Your privacy comes first</h3>
+        <p>As the internet grows and changes, Firefox continues to focus on your right to privacy  — we call it the <a href="{{ url('firefox.privacy.index') }}" data-cta-type="link" data-cta-text="Personal Data Promise">Personal Data Promise</a>: Take less. Keep it safe. No secrets. Your data, your web activity, your life online is protected with Firefox.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mzp-l-content t-discover">
+    <h2 class="c-section-title mzp-has-zap-10 js-go">Keep all your favorite browser features — and <strong>discover</strong> new ones.</h2>
+
+    <div class="mzp-l-card-third js-go">
+
+      <div class="mzp-c-card">
+        <img src="{{ static('img/firefox/new/desktop/goog.svg') }}" width="230" alt="">
+        <h3 class="mzp-u-title-xs">Works with Google products</h3>
+        </p>All your favorite Google tools (like Gmail and Docs) work seamlessly in the Firefox browser.</p>
+      </div>
+
+      <div class="mzp-c-card">
+        <img src="{{ static('img/firefox/new/desktop/contain.svg') }}" width="230" alt="">
+        <h3 class="mzp-u-title-xs">Facebook Container</h3>
+        <p><a href="https://addons.mozilla.org/en-US/firefox/addon/facebook-container/{{ referrals }}" rel="external noopener" data-cta-type="link" data-cta-text="Download this browser extension">Download this browser extension</a> to stop Facebook (and Instagram) from tracking you around the web.</p>
+      </div>
+
+      <div class="mzp-c-card">
+        <img src="{{ static('img/firefox/new/desktop/sync.svg') }}" width="230" alt="">
+        <h3 class="mzp-u-title-xs">Sync your devices</h3>
+        <p>Firefox is available on all your devices; take your tabs, history and bookmarks with you. All you need is a <a href="{{ url('firefox.accounts') }}" data-cta-type="link" data-cta-text="Firefox account">Firefox account</a>.</p>
+      </div>
+
+      <div class="mzp-c-card">
+        <img src="{{ static('img/firefox/new/desktop/screenshots.svg') }}" width="230" alt="">
+        <h3 class="mzp-u-title-xs">Screenshots</h3>
+        <p>Grab a high-resolution image of anything online with our <a href="https://support.mozilla.org/en-US/kb/firefox-screenshots{{ referrals }}" rel="external noopener" data-cta-type="link" data-cta-text="screenshot">screenshot</a> tool built right in the browser</p>
+      </div>
+
+      <div class="mzp-c-card">
+        <img src="{{ static('img/firefox/new/desktop/etp.svg') }}" width="230" alt="">
+        <h3 class="mzp-u-title-xs">Enhanced Tracking Protection (ETP)</h3>
+        <p>Firefox automatically <a href="https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop{{referrals}}" rel="external noopener" data-cta-type="link" data-cta-text="block many trackers">blocks many third party trackers</a> from collecting and selling your web activity.</p>
+      </div>
+
+      <div class="mzp-c-card">
+        <img src="{{ static('img/firefox/new/desktop/pinp.svg') }}" width="230" alt="">
+        <h3 class="mzp-u-title-xs">Picture-in-Picture</h3>
+        <p>From watching a web tutorial to keeping an eye on your favorite team, your video follows you while you multitask.</p>
+      </div>
+    </div>
+
+    {{ download_firefox(dom_id='download-discover', download_location='discover cta') }}
+  </section>
+
+  <section class="c-support">
+    Questions? <a href="https://support.mozilla.org/en-US/products/firefox{{ referrals }}" rel="external noopener" data-cta-type="link" data-cta-text="Mozilla support">Mozilla support</a> has you covered.
+  </section>
+
+  <aside id="js-mobile" class="show-android show-ios" data-nosnippet>
+    <div class="c-block t-mobile mzp-has-media-hide-on-sm">
+      <div class="c-block-container">
+        <div class="c-block-body">
+          <h1 class="c-logo t-browser-word-hor-white-xs">Firefox Browser</h1>
+          <h2 class="mzp-has-zap-7 mzp-u-title-md show-android">Get Firefox Browser for <strong>Android</strong></h2>
+          <h2 class="mzp-has-zap-7 mzp-u-title-md show-ios">Get Firefox Browser for <strong>iOS</strong></h2>
+
+          <p>Download the Firefox mobile browser for automatic protection on all your devices.</p>
+
+          <div class="mobile-download-buttons-wrapper">
+            <ul class="mobile-download-buttons">
+              <li class="android">
+                {{ google_play_button() }}
+              </li>
+              <li class="ios">
+                <a href="{{ ios_url }}" data-link-type="download" data-download-os="iOS">
+                  <img src="{{ l10n_img('firefox/ios/btn-app-store.svg') }}" alt="{{ ftl('download-button-download-app-store') }}" width="152" height="45">
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="c-block-media mzp-l-h-center mzp-l-media-constrain-height">
+          {{ high_res_img('img/firefox/new/desktop/android.png', {'width': '316', 'height': '606', 'class': 'c-block-media-img show-android', 'alt': '' }) }}
+          {{ high_res_img('img/firefox/new/desktop/ios.png', {'width': '315', 'height': '580', 'class': 'c-block-media-img show-ios', 'alt': '' }) }}
+        </div>
+      </div>
+    </div>
+    <h2 class="c-desktop">
+      Learn about the Firefox desktop browser below
+    </h2>
+  </aside>
+
+</main>
+{% endblock %}
+
+{% block js %}
+  {{ js_async_bundle('firefox_desktop_download') }}
+
+  {% if switch('stub-attribution-macos') %}
+    {{ js_bundle('stub-attribution-macos') }}
+  {% endif %}
+{% endblock %}
+
+{% block structured_data %}
+  {
+    "@context": "https://schema.org/",
+    "@graph": [
+      {% include 'includes/structured-data/software/firefox-browser-software.json' %}
+      ,
+      {% include 'includes/structured-data/breadcrumb/new.json' %}
+    ]
+  }
+{% endblock %}
